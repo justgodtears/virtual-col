@@ -38,6 +38,12 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     
     # Create a copy and add the virtual column
     df_copy = df.copy()
-    df_copy[new_column] = df_copy.eval(role)
+
+    # Evaluate the mathematical expression and add as new column
+    try:
+        df_copy[new_column] = df_copy.eval(role)
+    except Exception:
+        # Handle edge cases like "a +", "* b", or other malformed expressions
+        return pd.DataFrame([])
     
     return df_copy
