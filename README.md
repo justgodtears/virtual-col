@@ -49,4 +49,3 @@ pytest test_solution.py
 
 ## Author
 Oliwier
-```
